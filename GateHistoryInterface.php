@@ -3,14 +3,14 @@
  * Created by PhpStorm.
  * User: patryk.wozinski
  * Date: 16/10/2018
- * Time: 08:19
+ * Time: 08:50
  */
 declare(strict_types=1);
 
 namespace Application;
 
 
-interface GateInterface
+interface GateHistoryInterface
 {
-	public function dispatch(CommandInterface $command): void;
+	public function register(CommandInterface $command): void;
 }

@@ -10,7 +10,10 @@ declare(strict_types=1);
 namespace Application;
 
 
-final class Gate
+final class Gate implements GateInterface
 {
-	//
+	public function dispatch(CommandInterface $command): void
+	{
+		// TODO: Implement dispatch() method.
+	}
 }
