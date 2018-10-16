@@ -30,17 +30,17 @@ final class RunEnvironment
 	{
 		$commandHandler = $this->handlerProvider->handlerFor($command);
 
-		$this->transaction->beginTransaction();
+		$this->transaction->begin();
 
 		try
 		{
 			$commandHandler->handle($command);
 
-			$this->transaction->commitTransaction();
+			$this->transaction->commit();
 		}
 		catch (\Exception $exception)
 		{
-			$this->transaction->rollbackTransaction();
+			$this->transaction->rollback();
 
 			// Here we can add logging or something else.
 			throw RunningStoppedException::forCommand($command);

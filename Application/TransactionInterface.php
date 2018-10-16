@@ -12,9 +12,9 @@ namespace App\Application;
 
 interface TransactionInterface
 {
-	public function beginTransaction(): void;
+	public function begin(): void;
 
-	public function rollbackTransaction(): void;
+	public function rollback(): void;
 
-	public function commitTransaction(): void;
+	public function commit(): void;
 }

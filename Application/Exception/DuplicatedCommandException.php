@@ -16,7 +16,7 @@ final class DuplicatedCommandException extends \RuntimeException
 {
 	public static function forCommand(CommandInterface $command): self
 	{
-		$message = sprintf('', $command);
+		$message = sprintf('Duplicated command identified by: %s', $command->commandIdentity());
 
 		return new self($message);
 	}
