@@ -12,6 +12,8 @@ namespace App\Application\Shared;
 
 interface Historable
 {
+	public function identifier(): string;
+
 	/**
 	 * Get time to expire.
 	 *

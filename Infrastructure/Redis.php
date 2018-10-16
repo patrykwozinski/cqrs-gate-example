@@ -12,6 +12,11 @@ namespace App\Infrastructure;
 // This is only pseudo-code redis implementation.
 final class Redis
 {
+	public function exists(string $key): bool
+	{
+		return true; // or false, whateva
+	}
+
 	public function expire(string $key, int $seconds): void
 	{
 		//

@@ -24,11 +24,19 @@ final class Gate implements GateInterface
 	/** @var QueueInterface */
 	private $queue;
 
-	public function __construct(GateHistoryInterface $gateHistory, LoggerInterface $logger, QueueInterface $queue)
-	{
-		$this->gateHistory = $gateHistory;
-		$this->logger      = $logger;
-		$this->queue       = $queue;
+	/** @var RunEnvironment */
+	private $runEnvironment;
+
+	public function __construct(
+		GateHistoryInterface $gateHistory,
+		LoggerInterface $logger,
+		QueueInterface $queue,
+		RunEnvironment $runEnvironment
+	) {
+		$this->gateHistory    = $gateHistory;
+		$this->logger         = $logger;
+		$this->queue          = $queue;
+		$this->runEnvironment = $runEnvironment;
 	}
 
 	public function dispatch(CommandInterface $command): void
@@ -39,7 +47,7 @@ final class Gate implements GateInterface
 		}
 		catch (DuplicatedCommandException $exception)
 		{
-			$this->logger->info($exception->getMessage());
+			$this->logger->info($exception);
 
 			return;
 		}
@@ -52,6 +60,6 @@ final class Gate implements GateInterface
 			return;
 		}
 
-
+		$this->runEnvironment->run($command);
 	}
 }

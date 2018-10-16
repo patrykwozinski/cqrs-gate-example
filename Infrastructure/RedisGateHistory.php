@@ -13,6 +13,7 @@ namespace App\Infrastructure;
 use App\Application\CommandInterface;
 use App\Application\Exception\DuplicatedCommandException;
 use App\Application\GateHistoryInterface;
+use App\Application\Shared\Historable;
 
 class RedisGateHistory implements GateHistoryInterface
 {
@@ -26,11 +27,15 @@ class RedisGateHistory implements GateHistoryInterface
 
 	public function register(CommandInterface $command): void
 	{
-		if ($command instanceof )
+		if ($command instanceof Historable)
 		{
+			if ($this->redis->exists($command->identifier()))
+			{
+				throw DuplicatedCommandException::forCommand($command);
+			}
 
+			$this->redis->incrementHash($command->identifier());
+			$this->redis->expire($command->identifier(), $command->expireAfter());
 		}
-
-		throw DuplicatedCommandException::forCommand($command);
 	}
 }
