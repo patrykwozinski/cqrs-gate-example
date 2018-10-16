@@ -12,8 +12,18 @@ namespace App\Application;
 
 final class RunEnvironment
 {
+	/** @var CommandHandlerProvider */
+	private $handlerProvider;
+
+	public function __construct(CommandHandlerProvider $commandHandlerProvider)
+	{
+		$this->handlerProvider = $commandHandlerProvider;
+	}
+
 	public function run(CommandInterface $command): void
 	{
+		$commandHandler = $this->handlerProvider->handlerFor($command);
 
+		$commandHandler->handle($command);
 	}
 }
