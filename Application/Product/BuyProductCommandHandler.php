@@ -10,7 +10,16 @@ declare(strict_types=1);
 namespace App\Application\Product;
 
 
-final class BuyProductCommandHandler
-{
+use App\Application\CommandHandlerInterface;
+use App\Application\CommandInterface;
 
+final class BuyProductCommandHandler implements CommandHandlerInterface
+{
+	/**
+	 * @param CommandInterface | BuyProductCommand $command
+	 */
+	public function handle(CommandInterface $command): void
+	{
+		// Buying, saving blah blah blah.
+	}
 }

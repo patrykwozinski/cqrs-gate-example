@@ -24,6 +24,12 @@ final class BuyProductCommand implements CommandInterface, Historable
 	/** @var int */
 	private $productId;
 
+	public function __construct(int $userId, int $productId)
+	{
+		$this->userId    = $userId;
+		$this->productId = $productId;
+	}
+
 	public function userId(): int
 	{
 		return $this->userId;
