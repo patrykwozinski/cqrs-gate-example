@@ -15,7 +15,7 @@ use App\Application\Exception\DuplicatedCommandException;
 use App\Application\GateHistoryInterface;
 use App\Application\Shared\Historable;
 
-class RedisGateHistory implements GateHistoryInterface
+final class RedisGateHistory implements GateHistoryInterface
 {
 	/** @var Redis */
 	private $redis;
