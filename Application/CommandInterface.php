@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Application;
+namespace App\Application;
 
 
 interface CommandInterface

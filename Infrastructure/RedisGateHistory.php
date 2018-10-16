@@ -7,8 +7,12 @@
  */
 declare(strict_types=1);
 
-namespace Application;
+namespace App\Infrastructure;
 
+
+use App\Application\CommandInterface;
+use App\Application\Exception\DuplicatedCommandException;
+use App\Application\GateHistoryInterface;
 
 class RedisGateHistory implements GateHistoryInterface
 {
@@ -22,7 +26,10 @@ class RedisGateHistory implements GateHistoryInterface
 
 	public function register(CommandInterface $command): void
 	{
-		//
+		if ($command instanceof )
+		{
+
+		}
 
 		throw DuplicatedCommandException::forCommand($command);
 	}

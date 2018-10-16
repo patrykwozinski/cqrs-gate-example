@@ -7,8 +7,10 @@
  */
 declare(strict_types=1);
 
-namespace Application;
+namespace App\Application\Exception;
 
+
+use App\Application\CommandInterface;
 
 final class DuplicatedCommandException extends \RuntimeException
 {
