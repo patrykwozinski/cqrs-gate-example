@@ -35,6 +35,11 @@ final class BuyProductCommand implements CommandInterface, Historable
 		return $this->userId;
 	}
 
+	public function commandIdentity(): string
+	{
+		return 'buy_product';
+	}
+
 	public function identifier(): string
 	{
 		$identifier = sprintf('%s-%s', $this->userId, $this->productId);

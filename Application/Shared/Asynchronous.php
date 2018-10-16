@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace App\Application\Product;
+namespace App\Application\Shared;
 
 
 interface Asynchronous

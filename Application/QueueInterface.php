@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace App\Application;
 
 
-use App\Application\Product\Asynchronous;
+use App\Application\Shared\Asynchronous;
 
 interface QueueInterface
 {

@@ -11,7 +11,7 @@ namespace App\Application;
 
 
 use App\Application\Exception\DuplicatedCommandException;
-use App\Application\Product\Asynchronous;
+use App\Application\Shared\Asynchronous;
 
 final class Gate implements GateInterface
 {
