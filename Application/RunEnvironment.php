@@ -10,20 +10,40 @@ declare(strict_types=1);
 namespace App\Application;
 
 
+use App\Application\Exception\RunningStoppedException;
+
 final class RunEnvironment
 {
 	/** @var CommandHandlerProvider */
 	private $handlerProvider;
 
-	public function __construct(CommandHandlerProvider $commandHandlerProvider)
+	/** @var TransactionInterface */
+	private $transaction;
+
+	public function __construct(CommandHandlerProvider $commandHandlerProvider, TransactionInterface $transaction)
 	{
 		$this->handlerProvider = $commandHandlerProvider;
+		$this->transaction     = $transaction;
 	}
 
 	public function run(CommandInterface $command): void
 	{
 		$commandHandler = $this->handlerProvider->handlerFor($command);
 
-		$commandHandler->handle($command);
+		$this->transaction->beginTransaction();
+
+		try
+		{
+			$commandHandler->handle($command);
+
+			$this->transaction->commitTransaction();
+		}
+		catch (\Exception $exception)
+		{
+			$this->transaction->rollbackTransaction();
+
+			// Here we can add logging or something else.
+			throw RunningStoppedException::forCommand($command);
+		}
 	}
 }
